@@ -1,4 +1,4 @@
-const BASE_URL = "https://platzi-badges-x.web.app/";
+const BASE_URL = "https://platzi-badges-x.web.app";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const randomNumber = (min = 0, max = 1) =>
