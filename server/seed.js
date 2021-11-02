@@ -31,7 +31,7 @@ function main() {
   };
 
   fs.writeFileSync(
-    path.resolve(__dirname, 'db.json'),
+    path.resolve('db.json'),
     JSON.stringify(data, null, 4)
   );
 }
