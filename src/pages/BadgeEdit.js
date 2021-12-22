@@ -22,33 +22,31 @@ const BadgeEdit = (props) => {
   const badgeId = params.badgeId;
 
   useEffect(() => {
+    const fetchData = async (e) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await api.badges.read();
+        const isBadge = response.filter((badge) => {
+          if (badge.id === badgeId) {
+            setForm(badge);
+            return true;
+          }
+          return false;
+        });
+
+        isBadge && setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(error);
+      }
+    };
     fetchData();
-  }, []);
-
-  const fetchData = async (e) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.badges.read();
-      const isBadge = response.filter((badge) => {
-        if (badge.id === badgeId) {
-          setForm(badge);
-          return true;
-        }
-        return false;
-      });
-
-      isBadge && setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      setError(error);
-    }
-  };
+  }, [badgeId]);
 
   const handleChange = (e) => {
-    setForm({...form,
-      [e.target.name]: e.target.value,})
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {

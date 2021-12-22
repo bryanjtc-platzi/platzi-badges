@@ -17,28 +17,27 @@ const BadgeDetailsContainer = (props) => {
   const badgeId = params.badgeId;
 
   useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await api.badges.read();
+        const isBadge = response.filter((badge) => {
+          if (badge.id === badgeId) {
+            setData(badge);
+            return true;
+          }
+          return false;
+        });
+        isBadge && setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(error);
+      }
+    };
     fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await api.badges.read();
-      const isBadge = response.filter((badge) => {
-        if (badge.id === badgeId) {
-          setData(badge);
-          return true;
-        }
-        return false;
-      });
-      isBadge && setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      setError(error);
-    }
-  };
+  }, [badgeId]);
 
   const handleOpenModal = (e) => {
     setModalIsOpen(true);
