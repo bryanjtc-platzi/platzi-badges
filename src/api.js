@@ -1,4 +1,4 @@
-const BASE_URL = "https://platzi-badges-x-default-rtdb.firebaseio.com/";
+const BASE_URL = "https://platzi-badges-x-default-rtdb.firebaseio.com";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const randomNumber = (min = 0, max = 1) =>
@@ -32,18 +32,31 @@ const api = {
         body: JSON.stringify(badge),
       });
     },
-    read(badgeId) {
-      return callApi(`/badges/${badgeId}`);
+    read() {
+      return callApi(`/badges`);
     },
     update(badgeId, updates) {
-      return callApi(`/badges/${badgeId}`, {
+      const response = callApi(`/badges/`);
+      let id = response.filter((badge, number) => {
+        if (badge.id === badgeId) {
+          return number;
+        }
+        return null;
+      });
+      return callApi(`/badges/${id}`, {
         method: "PUT",
         body: JSON.stringify(updates),
       });
     },
-    // Lo hubiera llamado `delete`, pero `delete` es un keyword en JavaScript asi que no es buena idea :P
     remove(badgeId) {
-      return callApi(`/badges/${badgeId}`, {
+      const response = callApi(`/badges/`);
+      let id = response.filter((badge, number) => {
+        if (badge.id === badgeId) {
+          return number;
+        }
+        return null;
+      });
+      return callApi(`/badges/${id}`, {
         method: "DELETE",
       });
     },
