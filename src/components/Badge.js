@@ -12,7 +12,7 @@ class Badge extends React.Component {
           <img src={confLogo} alt="Logo de la conferencia" />
         </div>
 
-        <div className="Badge__section-name">
+        <div className="Badge__section-name p-2">
           <Gravatar
             className="Badge__avatar"
             email={this.props.email}
@@ -24,7 +24,7 @@ class Badge extends React.Component {
         </div>
 
         <div className="Badge__section-info">
-          <h3>{this.props.jobTitle}</h3>
+          <h3 className="text-center p-2">{this.props.jobTitle}</h3>
           <div>@{this.props.twitter}</div>
         </div>
 

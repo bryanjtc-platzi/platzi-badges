@@ -12,7 +12,7 @@ function createBadges(limit = 50) {
     const email = faker.internet.email();
 
     result.push({
-      id: faker.random.uuid(),
+      id: faker.datatype.uuid(),
       firstName,
       lastName,
       email,
