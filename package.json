@@ -23,7 +23,7 @@
     "@faker-js/faker": "9.5.1",
     "json-server": "0.17.4",
     "npm-run-all2": "7.0.2",
-    "vite": "6.0.9"
+    "vite": "6.0.12"
   },
   "eslintConfig": {
     "extends": "react-app"
